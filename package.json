@@ -1,0 +1,27 @@
+{
+  "name": "highload-hw1",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ITMO DDIA 2026 — Fullstack HW1: Grafana automation",
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "tsx --test test/*.test.ts",
+    "check": "npm run typecheck && npm test && npm run build"
+  },
+  "dependencies": {
+    "@prometheus-io/client": "0.16.1",
+    "fastify": "5.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3"
+  }
+}
