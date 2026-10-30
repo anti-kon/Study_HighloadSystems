@@ -13,6 +13,7 @@
     "start": "node dist/server.js",
     "typecheck": "tsc -p tsconfig.test.json",
     "test": "tsx --test test/*.test.ts",
+    "dashboard:generate": "node --env-file=.env dist/dashboard/cli.js",
     "check": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
