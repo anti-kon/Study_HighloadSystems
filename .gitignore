@@ -3,6 +3,7 @@ dist/
 coverage/
 .playwright-cli/
 output/playwright/
+output/load/
 .env
 .env.*
 !.env.example

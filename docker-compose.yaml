@@ -4,6 +4,11 @@ x-app: &app
   image: highload-hw1-app:local
   init: true
   restart: unless-stopped
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
   healthcheck:
     test:
       - CMD
@@ -105,6 +110,36 @@ services:
         condition: service_healthy
       grafana:
         condition: service_healthy
+
+  load-generator:
+    image: highload-hw1-app:local
+    pull_policy: never
+    init: true
+    restart: unless-stopped
+    stop_grace_period: 10s
+    command: ["node", "dist/load/cli.js"]
+    environment:
+      LOAD_TARGETS: http://app-1:8080,http://app-2:8080
+      LOAD_START_RPS: "2"
+      LOAD_TARGET_RPS: "30"
+      LOAD_RAMP_SECONDS: "120"
+      LOAD_POOL_SIZE: "256"
+      LOAD_MAX_IN_FLIGHT: "100"
+      LOAD_REQUEST_TIMEOUT_MS: "2000"
+      LOAD_SHUTDOWN_GRACE_MS: "3000"
+      LOAD_LOG_INTERVAL_SECONDS: "10"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    depends_on:
+      app-1:
+        condition: service_healthy
+      app-2:
+        condition: service_healthy
+      dashboard-generator:
+        condition: service_completed_successfully
 
 volumes:
   prometheus-data:

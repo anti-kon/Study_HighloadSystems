@@ -14,7 +14,9 @@
     "typecheck": "tsc -p tsconfig.test.json",
     "test": "tsx --test test/*.test.ts",
     "dashboard:generate": "node --env-file=.env dist/dashboard/cli.js",
+    "load:start": "node dist/load/cli.js",
     "check:dashboard": "node --env-file=.env scripts/check-dashboard.mjs",
+    "check:load": "node scripts/check-load.mjs",
     "check:stack": "node --env-file=.env scripts/check-stack.mjs",
     "check": "npm run typecheck && npm test && npm run build"
   },
