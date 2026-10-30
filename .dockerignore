@@ -1,0 +1,13 @@
+node_modules
+dist
+coverage
+.playwright-cli
+output/playwright
+.git
+.reference
+.env
+.env.*
+!.env.example
+test
+*.log
+README.md
